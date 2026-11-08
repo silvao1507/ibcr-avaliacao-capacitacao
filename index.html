@@ -419,7 +419,7 @@ function load(){
   var st = el("p","hint", L(S.rLoad)); c.appendChild(st); r.appendChild(c);
   var done = false;
   setTimeout(function(){ if(!done) st.textContent = L(S.rSlow); }, 15000);
-  call({acao:"resultados", chave:chave}, null).then(function(x){
+  call({acao:"resultados", chave:chave}, {acao:"resultados", chave:chave}).then(function(x){
     done = true;
     if(!x || x.ok === false){ try{ localStorage.removeItem("ibcr-k"); }catch(e){} chave = ""; askKey(L(S.kW)); return; }
     rows = (x.linhas || []).filter(function(v){ return v && v.respostas; });
