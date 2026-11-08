@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Avaliação da capacitação — IBCR</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#00837A">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira:wght@400;500;600;700&family=Public+Sans:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#fff;--surface:#F3F8F7;--card:#fff;--fg:#16211F;--muted:#5C6E6B;--line:#D9E4E2;--ls:#B9CBC8;--teal:#00A99D;--td:#00837A;--soft:#E3F3F1;--gray:#808080;
+--fd:"Saira","Segoe UI",system-ui,sans-serif;--fb:"Public Sans","Segoe UI",system-ui,sans-serif;color-scheme:light}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0C1413;--surface:#111B1A;--card:#141F1E;--fg:#E7EFEE;--muted:#9BAFAC;--line:#243432;--ls:#334845;--teal:#2FC6B8;--td:#00A99D;--soft:#13302D;--gray:#8E9B99;color-scheme:dark}}
+:root[data-theme=dark]{--bg:#0C1413;--surface:#111B1A;--card:#141F1E;--fg:#E7EFEE;--muted:#9BAFAC;--line:#243432;--ls:#334845;--teal:#2FC6B8;--td:#00A99D;--soft:#13302D;--gray:#8E9B99;color-scheme:dark}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--bg);color:var(--fg);font:15px/1.55 var(--fb);-webkit-font-smoothing:antialiased}
+h1,h2,legend,.eyebrow,.chip,.na,.btn,.count,.fact,.rnums,.tile b,.tile span,.dist .k,.langs button{font-family:var(--fd)}
+.wrap{max-width:720px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.mast{background:linear-gradient(135deg,var(--td),var(--teal));color:#fff}
+.mast .wrap{padding-block:26px 24px}
+.brow{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.mark{line-height:1}
+.mark b{display:block;font-family:var(--fd);font-weight:600;font-size:31px;letter-spacing:.06em}
+.mark span{display:block;font-family:var(--fd);font-size:8.5px;letter-spacing:.17em;opacity:.9;margin-top:2px}
+.langs{display:flex;gap:2px;background:rgba(255,255,255,.16);border-radius:999px;padding:3px}
+.langs button{font-size:11px;font-weight:600;letter-spacing:.1em;border:0;background:0 0;color:#EAFBF9;padding:5px 11px;border-radius:999px;cursor:pointer}
+.langs button[aria-pressed=true]{background:#fff;color:var(--td)}
+h1{font-size:clamp(23px,5.2vw,31px);font-weight:600;letter-spacing:-.015em;line-height:1.15;margin:20px 0 8px;text-wrap:balance}
+.lede{margin:0;max-width:56ch;color:#E2F6F4;font-size:14.5px}
+.facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.fact{font-size:11px;font-weight:500;letter-spacing:.09em;text-transform:uppercase;border:1px solid rgba(255,255,255,.45);border-radius:999px;padding:4px 11px}
+.rail{position:sticky;top:0;z-index:9;background:var(--bg);border-bottom:1px solid var(--line)}
+.rail .wrap{display:flex;align-items:center;gap:12px;padding-block:9px}
+.bar{flex:1;min-width:0;height:5px;border-radius:999px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--teal);transition:width .25s}
+.count{font-size:12px;font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+main .wrap{padding-block:22px 40px;display:flex;flex-direction:column;gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 16px}
+.eyebrow{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--td);margin:0 0 4px}
+.card h2{font-size:17px;font-weight:600;margin:0 0 3px}
+.hint{margin:0;color:var(--muted);font-size:13px}
+.demo{color:var(--td)}
+.anchors{display:flex;justify-content:space-between;gap:12px;margin-top:10px;color:var(--muted);font-size:11.5px;border-bottom:1px dashed var(--line);padding-bottom:9px}
+.item{border:0;margin:0;padding:12px 0;border-top:1px solid var(--line)}
+.item:first-of-type{border-top:0}
+.item.miss{background:var(--soft);border-radius:8px;padding-inline:10px;margin-inline:-10px}
+.ihead{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.item legend{font-size:14.5px;font-weight:500;line-height:1.35;padding:0}
+.na{flex:none;font-size:11px;font-weight:600;letter-spacing:.07em;border:1px solid var(--ls);background:0 0;color:var(--muted);border-radius:999px;padding:3px 9px;cursor:pointer}
+.na[aria-pressed=true]{background:var(--gray);border-color:var(--gray);color:#fff}
+.scale{display:grid;grid-template-columns:repeat(11,1fr);gap:4px;margin-top:9px}
+.scale.off{opacity:.3;pointer-events:none}
+.scale input{position:absolute;opacity:0;width:1px;height:1px}
+.chip{display:flex;align-items:center;justify-content:center;min-height:32px;border:1px solid var(--ls);border-radius:7px;font-size:12.5px;font-weight:500;color:var(--muted);cursor:pointer;font-variant-numeric:tabular-nums}
+.chip:hover{border-color:var(--teal);color:var(--td)}
+.scale input:checked+.chip{background:var(--teal);border-color:var(--teal);color:#fff}
+.scale input:focus-visible+.chip{outline:2px solid var(--td);outline-offset:2px}
+label.field{display:block;font-size:14.5px;font-weight:500;margin:14px 0 6px}
+input,textarea{width:100%;font:15px var(--fb);color:var(--fg);background:var(--bg);border:1px solid var(--ls);border-radius:8px;padding:10px 12px}
+input:focus,textarea:focus{outline:2px solid var(--td);outline-offset:1px;border-color:var(--teal)}
+textarea{min-height:84px;resize:vertical}
+.req{color:var(--td);font-weight:600}
+.err{color:#B4452F;font-size:13px;margin:8px 0 0}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]) .err{color:#FF9478}}
+:root[data-theme=dark] .err{color:#FF9478}
+.btn{border:0;border-radius:9px;background:var(--td);color:#fff;font-size:15px;font-weight:600;padding:14px 18px;cursor:pointer;font-family:var(--fd);text-decoration:none;display:inline-block;text-align:center}
+.btn:hover{background:var(--teal)}
+.btn:disabled{opacity:.55}
+.btn.g{background:0 0;color:var(--td);border:1px solid var(--ls);font-size:13px;padding:9px 14px}
+.note{color:var(--muted);font-size:12.5px;text-align:center;margin:0}
+.done{text-align:center;padding:34px 10px}
+.tick{width:54px;height:54px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:26px}
+pre{text-align:left;white-space:pre-wrap;word-break:break-word;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px;font-size:11.5px;max-height:170px;overflow:auto}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-top:14px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:9px;padding:11px 12px}
+.tile b{display:block;font-size:27px;font-weight:600;line-height:1.1;font-variant-numeric:tabular-nums}
+.tile span{display:block;margin-top:2px;font-size:10.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.rrow{padding:12px 0;border-top:1px solid var(--line)}
+.rtop{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.rlabel{font-size:14px;font-weight:500;min-width:0}
+.rnums{font-size:12px;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+.rnums b{color:var(--fg);font-size:16px}
+.dist{display:grid;grid-template-columns:repeat(11,1fr);gap:2px;margin-top:8px}
+.dist .c{min-height:26px;border:1px solid var(--line);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:11.5px;font-variant-numeric:tabular-nums}
+.dist .k{text-align:center;font-size:10px;color:var(--muted)}
+.quote{margin:10px 0 0;border-left:2px solid var(--teal);padding-left:11px;font-size:14px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{text-align:left;padding:7px 6px;border-bottom:1px solid var(--line)}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+td.n{font-weight:600}
+footer .wrap{padding-block:18px 26px;border-top:1px solid var(--line);color:var(--muted);font-size:12px;text-align:right}
+@media(max-width:430px){.scale{grid-template-columns:repeat(6,1fr)}.mark b{font-size:26px}}
+</style>
+</head>
+<body>
+<header class="mast"><div class="wrap">
+<div class="brow">
+<div class="mark"><b>IBCR</b><span>INSTITUTO BRASILEIRO DE CIRURGIA ROBÓTICA</span></div>
+<div class="langs" role="group" aria-label="Idioma"><button type="button" data-l="pt" aria-pressed="true">PT</button><button type="button" data-l="en" aria-pressed="false">EN</button></div>
+</div>
+<h1 id="h"></h1><p class="lede" id="le"></p>
+<div class="facts"><span class="fact" id="f1"></span><span class="fact" id="f2"></span><span class="fact" id="f3"></span><span class="fact" id="fd" hidden></span></div>
+</div></header>
+<div class="rail" id="rail"><div class="wrap"><div class="bar"><i id="bar"></i></div><span class="count" id="cnt"></span></div></div>
+<main><div class="wrap" id="app"></div></main>
+<footer><div class="wrap" id="ft"></div></footer>
+
+<script>
+/* Cole aqui a URL /exec do Apps Script. Vazio = modo demonstracao. */
+var ENDPOINT = "";
+</script>
+<script>
+(function(){
+"use strict";
+var PT = 0, lang = (localStorage.getItem("ibcr-l") === "en") ? 1 : 0;
+function L(s){ return s.split("|")[lang]; }
+function $(s){ return document.querySelector(s); }
+function el(t,c,x){ var n=document.createElement(t); if(c)n.className=c; if(x!=null)n.textContent=x; return n; }
+
+var S = {
+ title:"Avaliação da capacitação em pesquisa|Research training evaluation",
+ lede:"Não pedimos nome, e-mail nem matrícula, e ninguém que responde vê as respostas dos outros. Só queremos saber o que funcionou, o que faltou e o que você quer aprender depois.|We ask for no name, e-mail or student ID, and nobody who answers sees anyone else's answers. We only want to know what worked, what was missing and what you want to learn next.",
+ f1:"Sem nome nem e-mail|No name, no e-mail", f2:"≈ 5 minutos|≈ 5 minutes", f3:"Núcleo de Pesquisa IBCR|IBCR Research Unit",
+ foot:"Instituto Brasileiro de Cirurgia Robótica · Núcleo de Pesquisa|Brazilian Institute of Robotic Surgery · Research Unit",
+ demo:"Modo demonstração|Demo mode",
+ demoF:"Ainda sem servidor: o que você enviar fica guardado só neste aparelho, para ver o fluxo completo.|No server yet: whatever you submit stays on this device, so you can see the whole flow.",
+ demoK:"Na demonstração, a chave é: demo|In demo mode the key is: demo",
+ idE:"Quem está respondendo|Who is answering",
+ idT:"Sua monitoria ou liga|Your monitoria or league",
+ idH:"Usamos só para comparar os grupos entre si — as sessões não foram iguais em todos.|Used only to compare groups — the sessions were not identical everywhere.",
+ mon:"Monitoria ou liga acadêmica da qual você faz parte|Monitoria or academic league you belong to",
+ monP:"Ex.: Liga de Urologia — UFBA|e.g. Urology League — UFBA",
+ req:"obrigatório|required",
+ naE:"Marque N/A em qualquer tópico que não foi abordado na sua turma.|Mark N/A for any topic that was not covered in your group.",
+ naT:"Não foi abordado comigo|Not covered in my group",
+ cE:"Aberto|Open", cT:"Suas impressões|Your impressions",
+ cH:"Tudo opcional. Escreva o que quiser — uma frase já ajuda.|All optional. Write whatever you like — one sentence helps.",
+ imp:"Suas impressões sobre a capacitação (opcional)|Your impressions of the training (optional)",
+ impP:"O que mais te marcou, o que mais ajudou, o que faltou…|What stood out, what helped most, what was missing…",
+ mud:"O que devemos mudar na próxima turma? (opcional)|What should we change for the next group? (optional)",
+ mudP:"Pode ser direto.|Be direct.",
+ send:"Enviar respostas|Submit answers", sending:"Enviando…|Sending…",
+ sendN:"Só a coordenação do IBCR vê as respostas.|Only the IBCR coordination sees the answers.",
+ errM:"Preencha a monitoria ou liga.|Please fill in your monitoria or league.",
+ okT:"Recebido. Obrigado!|Received. Thank you!",
+ okB:"Sua avaliação entra no relatório da capacitação. Nenhum outro respondente vê o que você escreveu.|Your evaluation goes into the training report. No other respondent sees what you wrote.",
+ badT:"Não deu para enviar|Couldn't send it",
+ badB:"Verifique a conexão e tente de novo. Se continuar, copie o bloco abaixo e envie no canal da capacitação.|Check your connection and try again. If it keeps failing, copy the block below and send it in the training channel.",
+ retry:"Tentar de novo|Try again", copy:"Copiar|Copy", copied:"Copiado|Copied",
+ rT:"Resultados|Results", rOv:"Visão geral|Overview",
+ rMT:"Resultados da capacitação|Training results",
+ rML:"Painel da coordenação. As respostas chegam sem nome, e quem responde só enxerga a própria.|Coordination dashboard. Answers arrive with no name, and respondents see only their own.",
+ rF1:"Coordenação|Coordination", rF2:"Acesso por chave|Key required",
+ rEmpty:"Nenhuma resposta registrada ainda.|No responses recorded yet.",
+ rLoad:"Carregando as respostas…|Loading responses…",
+ rSlow:"As respostas não chegaram. Verifique a conexão e recarregue.|The responses did not arrive. Check your connection and reload.",
+ kT:"Chave de acesso|Access key", kH:"A chave combinada com a coordenação.|The key agreed with the coordination.",
+ kL:"Chave|Key", kB:"Entrar|Enter", kW:"Chave incorreta.|Wrong key.", out:"Sair|Sign out",
+ rTot:"Respostas|Responses", rGr:"Grupos|Groups", rGe:"Média geral|Overall mean",
+ rDist:"Quantas pessoas deram cada nota|How many people gave each score",
+ rMean:"de média|mean",
+ rGT:"Por monitoria ou liga|By monitoria or league",
+ c1:"Grupo|Group", c2:"Respostas|Responses", c3:"Média geral|Overall mean",
+ rImp:"Impressões|Impressions", rMud:"O que devemos mudar|What we should change",
+ csv:"Baixar CSV|Download CSV", openF:"Abrir o formulário|Open the form"
+};
+
+var SEC = [
+ {e:"Bloco 1 de 4|Block 1 of 4", t:"Os tópicos ensinados|The topics taught",
+  h:"O quanto cada tópico ficou claro e útil para você.|How clear and useful each topic was for you.",
+  lo:"0 · não ficou claro|0 · not clear at all", hi:"ficou muito claro · 10|very clear · 10", na:1, i:[
+  ["t1","Pergunta de pesquisa e PICO|Research question and PICO"],
+  ["t2","Desenhos de estudo|Study designs"],
+  ["t3","Busca na literatura (PubMed, Embase)|Literature search (PubMed, Embase)"],
+  ["t4","Triagem e seleção de estudos (Rayyan)|Screening and study selection (Rayyan)"],
+  ["t5","Extração de dados|Data extraction"],
+  ["t6","Risco de viés (ROB 2 e ROBINS-I)|Risk of bias (ROB 2 and ROBINS-I)"],
+  ["t7","Metanálise e estatística|Meta-analysis and statistics"],
+  ["t8","Certeza da evidência (GRADE)|Certainty of evidence (GRADE)"],
+  ["t9","Escrita científica (estrutura IMRAD)|Scientific writing (IMRAD structure)"]]},
+ {e:"Bloco 2 de 4|Block 2 of 4", t:"Como foram as sessões|How the sessions went",
+  h:"A condução, e não o conteúdo.|The delivery, not the content.",
+  lo:"0 · ruim|0 · poor", hi:"excelente · 10|excellent · 10", na:1, i:[
+  ["s1","Clareza e didática dos instrutores|Clarity and teaching of the instructors"],
+  ["s2","Organização e logística|Organization and logistics"],
+  ["s3","Ritmo e duração das sessões|Pace and length of the sessions"],
+  ["s4","Material de apoio (slides, planilhas, artigos)|Supporting material (slides, spreadsheets, papers)"],
+  ["s5","Espaço para dúvidas e participação|Room for questions and participation"]]},
+ {e:"Bloco 3 de 4|Block 3 of 4", t:"O que ficou com você|What you took away",
+  h:"Pensando em você hoje, depois da capacitação.|Thinking about yourself today, after the training.",
+  lo:"0 · nada|0 · not at all", hi:"totalmente · 10|completely · 10", na:0, i:[
+  ["a0","Consegui acompanhar o conteúdo das sessões|I was able to follow the content of the sessions"],
+  ["r1","Me sinto confiante para entrar em um projeto de pesquisa agora|I feel confident to join a research project now"],
+  ["r2","Consigo aplicar o que aprendi na minha monitoria ou liga|I can apply what I learned in my monitoria or league"],
+  ["r3","Recomendaria esta capacitação a outro estudante|I would recommend this training to another student"]]},
+ {e:"Bloco 4 de 4|Block 4 of 4", t:"Curso de pesquisa do IBCR|IBCR research course",
+  h:"Estamos desenhando um curso próprio, começando por metanálise.|We are designing a course of our own, starting with meta-analysis.",
+  lo:"0 · nenhum interesse|0 · no interest", hi:"muito interesse · 10|strong interest · 10", na:0, i:[
+  ["c1","Interesse em participar de um curso de pesquisa do IBCR, começando por metanálise|Interest in joining an IBCR research course, starting with meta-analysis"],
+  ["c2","Interesse na modalidade presencial: alguns meses, aos finais de semana|Interest in the in-person track: a few months, on weekends"],
+  ["c3","Interesse na modalidade online: aulas disponibilizadas para assistir|Interest in the online track: classes made available to watch"]]}
+];
+
+var ALL = [];
+SEC.forEach(function(s){ s.i.forEach(function(it){ ALL.push({id:it[0], lb:it[1], na:s.na}); }); });
+
+var DEMO = !ENDPOINT, KEY = "ibcr-demo";
+function stored(){ try{ return JSON.parse(localStorage.getItem(KEY) || "[]"); }catch(e){ return []; } }
+
+function call(p, body){
+  if(DEMO) return new Promise(function(res){ setTimeout(function(){
+    if(p.acao === "enviar"){ var a = stored(); a.push(JSON.parse(p.dados));
+      try{ localStorage.setItem(KEY, JSON.stringify(a)); }catch(e){}
+      res({ok:true}); }
+    else if(p.acao === "resultados"){ res(p.chave === "demo" ? {ok:true, linhas:stored()} : {ok:false}); }
+    else res({ok:true});
+  }, 450); });
+  var qs = Object.keys(p).map(function(k){ return encodeURIComponent(k)+"="+encodeURIComponent(p[k]); }).join("&");
+  var post = body ? fetch(ENDPOINT, {method:"POST", body:JSON.stringify(body)}).then(function(r){ return r.json(); })
+                  : Promise.reject(0);
+  return post.catch(function(){ return jsonp(ENDPOINT + "?" + qs); });
+}
+function jsonp(url){
+  return new Promise(function(res, rej){
+    var cb = "ibcr" + Math.random().toString(36).slice(2,9), s = document.createElement("script");
+    var t = setTimeout(function(){ done(); rej(0); }, 20000);
+    function done(){ clearTimeout(t); try{ delete window[cb]; }catch(e){} if(s.parentNode) s.parentNode.removeChild(s); }
+    window[cb] = function(d){ done(); res(d); };
+    s.onerror = function(){ done(); rej(0); };
+    s.src = url + (url.indexOf("?") >= 0 ? "&" : "?") + "callback=" + cb;
+    document.head.appendChild(s);
+  });
+}
+
+function mast(res){
+  document.documentElement.lang = lang ? "en" : "pt-BR";
+  $("#h").textContent  = L(res ? S.rMT : S.title);
+  $("#le").textContent = L(res ? S.rML : S.lede);
+  $("#f1").textContent = L(res ? S.rF1 : S.f1);
+  $("#f2").textContent = L(res ? S.rF2 : S.f2);
+  $("#f3").textContent = L(S.f3);
+  $("#ft").textContent = L(S.foot);
+  var d = $("#fd"); d.hidden = !DEMO; d.textContent = L(S.demo);
+  document.querySelectorAll(".langs button").forEach(function(b){
+    b.setAttribute("aria-pressed", String((b.dataset.l === "en") === !!lang));
+  });
+}
+
+/* ---------- formulário ---------- */
+var ans = {}, nas = {}, warned = false, sent = false;
+
+function form(){
+  var r = $("#app"); r.textContent = "";
+  var c = el("section","card");
+  c.appendChild(el("p","eyebrow", L(S.idE)));
+  c.appendChild(el("h2","", L(S.idT)));
+  c.appendChild(el("p","hint", L(S.idH)));
+  if(DEMO) c.appendChild(el("p","hint demo", L(S.demoF)));
+  var lb = el("label","field"); lb.htmlFor = "mon"; lb.textContent = L(S.mon) + " ";
+  lb.appendChild(el("span","req","(" + L(S.req) + ")"));
+  var ip = document.createElement("input"); ip.id = "mon"; ip.type = "text"; ip.maxLength = 90;
+  ip.placeholder = L(S.monP);
+  var er = el("p","err"); er.id = "erm"; er.hidden = true;
+  c.appendChild(lb); c.appendChild(ip); c.appendChild(er); r.appendChild(c);
+
+  SEC.forEach(function(s){
+    var k = el("section","card");
+    k.appendChild(el("p","eyebrow", L(s.e)));
+    k.appendChild(el("h2","", L(s.t)));
+    k.appendChild(el("p","hint", L(s.h)));
+    if(s.na) k.appendChild(el("p","hint", L(S.naE)));
+    var a = el("div","anchors");
+    a.appendChild(el("span","", L(s.lo))); a.appendChild(el("span","", L(s.hi)));
+    k.appendChild(a);
+    s.i.forEach(function(it){
+      var id = it[0];
+      var fs = el("fieldset","item"); fs.id = "i-" + id;
+      var hd = el("div","ihead");
+      var lg = document.createElement("legend"); lg.textContent = L(it[1]); hd.appendChild(lg);
+      if(s.na){
+        var nb = el("button","na","N/A"); nb.type = "button"; nb.id = "na-" + id;
+        nb.setAttribute("aria-pressed","false"); nb.title = L(S.naT);
+        nb.onclick = function(){ toggle(id); };
+        hd.appendChild(nb);
+      }
+      fs.appendChild(hd);
+      var sc = el("div","scale"); sc.id = "s-" + id;
+      for(var v = 0; v <= 10; v++){
+        var in_ = document.createElement("input");
+        in_.type = "radio"; in_.name = id; in_.id = id + "-" + v;
+        in_.onchange = (function(id,v){ return function(){ pick(id,v); }; })(id,v);
+        var la = document.createElement("label");
+        la.className = "chip"; la.htmlFor = id + "-" + v; la.textContent = String(v);
+        sc.appendChild(in_); sc.appendChild(la);
+      }
+      fs.appendChild(sc); k.appendChild(fs);
+    });
+    r.appendChild(k);
+  });
+
+  var cc = el("section","card");
+  cc.appendChild(el("p","eyebrow", L(S.cE)));
+  cc.appendChild(el("h2","", L(S.cT)));
+  cc.appendChild(el("p","hint", L(S.cH)));
+  [["imp", S.imp, S.impP], ["mud", S.mud, S.mudP]].forEach(function(p){
+    var l = el("label","field", L(p[1])); l.htmlFor = p[0];
+    var t = document.createElement("textarea"); t.id = p[0]; t.maxLength = 700; t.placeholder = L(p[2]);
+    cc.appendChild(l); cc.appendChild(t);
+  });
+  r.appendChild(cc);
+
+  var sb = el("div","card");
+  var w = el("p","err"); w.id = "warn"; w.hidden = true;
+  var b = el("button","btn", L(S.send)); b.type = "button"; b.id = "go"; b.style.width = "100%";
+  b.onclick = submit;
+  sb.appendChild(w); sb.appendChild(b);
+  var n = el("p","note", L(S.sendN)); n.style.marginTop = "10px"; sb.appendChild(n);
+  r.appendChild(sb);
+  prog();
+}
+function pick(id,v){
+  ans[id] = v;
+  if(nas[id]){ delete nas[id]; var b = $("#na-"+id); if(b) b.setAttribute("aria-pressed","false"); }
+  var f = $("#i-"+id); if(f) f.classList.remove("miss");
+  prog();
+}
+function toggle(id){
+  var on = !nas[id], b = $("#na-"+id);
+  if(on){ nas[id] = 1; delete ans[id];
+    var ch = document.querySelector('input[name="'+id+'"]:checked'); if(ch) ch.checked = false;
+    $("#s-"+id).classList.add("off"); $("#i-"+id).classList.remove("miss");
+  } else { delete nas[id]; $("#s-"+id).classList.remove("off"); }
+  b.setAttribute("aria-pressed", String(on)); prog();
+}
+function prog(){
+  var n = 0;
+  ALL.forEach(function(it){ if(ans[it.id] != null || nas[it.id]) n++; });
+  $("#cnt").textContent = lang ? (n + " of " + ALL.length + " answered") : (n + " de " + ALL.length + " respondidas");
+  $("#bar").style.width = (n / ALL.length * 100) + "%";
+}
+function submit(){
+  if(sent) return;
+  var mon = ($("#mon").value || "").trim(), er = $("#erm");
+  if(!mon){ er.textContent = L(S.errM); er.hidden = false; $("#mon").focus();
+    $("#mon").scrollIntoView({block:"center", behavior:"smooth"}); return; }
+  er.hidden = true;
+  var miss = ALL.filter(function(it){ return ans[it.id] == null && !nas[it.id]; }), w = $("#warn");
+  if(miss.length && !warned){
+    warned = true;
+    w.textContent = lang ? (miss.length + " items are still blank. Tap submit again to send anyway.")
+                         : ("Faltam " + miss.length + " itens. Toque em enviar de novo para enviar assim mesmo.");
+    w.hidden = false;
+    miss.forEach(function(it){ var f = $("#i-"+it.id); if(f) f.classList.add("miss"); });
+    $("#i-"+miss[0].id).scrollIntoView({block:"center", behavior:"smooth"});
+    return;
+  }
+  w.hidden = true;
+  var p = { ts:new Date().toISOString(), lang:lang ? "en" : "pt", monitoria:mon,
+            impressoes:($("#imp").value||"").trim(), mudar:($("#mud").value||"").trim(),
+            respostas:{}, na:Object.keys(nas) };
+  ALL.forEach(function(it){ if(ans[it.id] != null) p.respostas[it.id] = ans[it.id]; });
+  var b = $("#go"); b.disabled = true; b.textContent = L(S.sending); sent = true;
+  call({acao:"enviar", dados:JSON.stringify(p)}, {acao:"enviar", dados:p})
+    .then(function(x){ if(x && x.ok === false) throw 0; end(1, p); })
+    .catch(function(){ end(0, p); });
+}
+function end(ok, p){
+  var r = $("#app"); r.textContent = "";
+  var c = el("section","card"), d = el("div","done");
+  d.appendChild(el("div","tick", ok ? "✓" : "!"));
+  d.appendChild(el("h2","", L(ok ? S.okT : S.badT)));
+  d.appendChild(el("p","hint", L(ok ? S.okB : S.badB)));
+  if(!ok){
+    var rb = el("button","btn", L(S.retry)); rb.type = "button"; rb.style.margin = "14px 0";
+    rb.onclick = function(){ rb.disabled = true;
+      call({acao:"enviar", dados:JSON.stringify(p)}, {acao:"enviar", dados:p})
+        .then(function(x){ if(x && x.ok === false) throw 0; end(1,p); })
+        .catch(function(){ rb.disabled = false; }); };
+    d.appendChild(rb);
+    var pre = el("pre","", JSON.stringify(p));
+    d.appendChild(pre);
+    var cb = el("button","btn g", L(S.copy)); cb.type = "button"; cb.style.marginTop = "10px";
+    cb.onclick = function(){ if(navigator.clipboard) navigator.clipboard.writeText(JSON.stringify(p))
+      .then(function(){ cb.textContent = L(S.copied); }, function(){}); };
+    d.appendChild(cb);
+  }
+  c.appendChild(d); r.appendChild(c);
+  $("#bar").style.width = "100%";
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
+/* ---------- resultados ---------- */
+var rows = null, chave = "";
+try{ chave = localStorage.getItem("ibcr-k") || ""; }catch(e){}
+
+function askKey(msg){
+  var r = $("#app"); r.textContent = "";
+  var c = el("section","card");
+  c.appendChild(el("p","eyebrow", L(S.rOv)));
+  c.appendChild(el("h2","", L(S.kT)));
+  c.appendChild(el("p","hint", L(S.kH)));
+  if(DEMO) c.appendChild(el("p","hint demo", L(S.demoK)));
+  var l = el("label","field", L(S.kL)); l.htmlFor = "k";
+  var i = document.createElement("input"); i.type = "password"; i.id = "k";
+  var e = el("p","err", msg || ""); e.hidden = !msg;
+  var b = el("button","btn", L(S.kB)); b.type = "button"; b.style.marginTop = "12px";
+  function go(){ var v = (i.value||"").trim(); if(!v) return; chave = v;
+    try{ localStorage.setItem("ibcr-k", v); }catch(x){} load(); }
+  b.onclick = go; i.onkeydown = function(ev){ if(ev.key === "Enter") go(); };
+  c.appendChild(l); c.appendChild(i); c.appendChild(e); c.appendChild(b);
+  r.appendChild(c); i.focus();
+}
+function load(){
+  var r = $("#app"); r.textContent = "";
+  var c = el("section","card");
+  c.appendChild(el("p","eyebrow", L(S.rOv)));
+  var st = el("p","hint", L(S.rLoad)); c.appendChild(st); r.appendChild(c);
+  var done = false;
+  setTimeout(function(){ if(!done) st.textContent = L(S.rSlow); }, 15000);
+  call({acao:"resultados", chave:chave}, null).then(function(x){
+    done = true;
+    if(!x || x.ok === false){ try{ localStorage.removeItem("ibcr-k"); }catch(e){} chave = ""; askKey(L(S.kW)); return; }
+    rows = (x.linhas || []).filter(function(v){ return v && v.respostas; });
+    draw();
+  }).catch(function(){ done = true; st.textContent = L(S.rSlow); });
+}
+function stat(id){
+  var v = [], na = 0, ct = [0,0,0,0,0,0,0,0,0,0,0];
+  rows.forEach(function(r){
+    var x = r.respostas ? r.respostas[id] : undefined;
+    if(typeof x === "number"){ v.push(x); if(x >= 0 && x <= 10) ct[x]++; }
+    else if(r.na && r.na.indexOf(id) >= 0) na++;
+  });
+  return { n:v.length, na:na, ct:ct,
+           m:v.length ? v.reduce(function(a,b){ return a+b; },0)/v.length : null };
+}
+function draw(){
+  var r = $("#app"); r.textContent = "";
+  var head = el("section","card");
+  head.appendChild(el("p","eyebrow", L(S.rOv)));
+  if(!rows.length){ head.appendChild(el("p","hint", L(S.rEmpty))); acts(head); r.appendChild(head); return; }
+  var all = [], gn = {};
+  rows.forEach(function(x){
+    ALL.forEach(function(it){ var v = x.respostas[it.id]; if(typeof v === "number") all.push(v); });
+    gn[((x.monitoria||"—")+"").trim() || "—"] = 1;
+  });
+  var tl = el("div","tiles");
+  function tile(v,t){ var d = el("div","tile"); d.appendChild(el("b","",v)); d.appendChild(el("span","",t)); return d; }
+  tl.appendChild(tile(String(rows.length), L(S.rTot)));
+  tl.appendChild(tile(String(Object.keys(gn).length), L(S.rGr)));
+  tl.appendChild(tile(all.length ? (all.reduce(function(a,b){return a+b;},0)/all.length).toFixed(1) : "—", L(S.rGe)));
+  head.appendChild(tl); acts(head); r.appendChild(head);
+
+  SEC.forEach(function(s){
+    var c = el("section","card");
+    c.appendChild(el("p","eyebrow", L(s.e)));
+    c.appendChild(el("h2","", L(s.t)));
+    c.appendChild(el("p","hint", L(S.rDist)));
+    var k = el("div","dist"); k.style.marginTop = "10px";
+    for(var i = 0; i <= 10; i++) k.appendChild(el("div","k", String(i)));
+    c.appendChild(k);
+    s.i.forEach(function(it){
+      var st = stat(it[0]), row = el("div","rrow"), top = el("div","rtop");
+      top.appendChild(el("div","rlabel", L(it[1])));
+      var nm = el("div","rnums");
+      nm.appendChild(el("b","", st.m == null ? "—" : st.m.toFixed(1)));
+      nm.appendChild(document.createTextNode(" " + L(S.rMean) + " · n=" + st.n + (s.na ? " · N/A " + st.na : "")));
+      top.appendChild(nm); row.appendChild(top);
+      var d = el("div","dist"), mx = Math.max.apply(null, st.ct) || 1;
+      st.ct.forEach(function(q, v){
+        var cl = el("div","c", q ? String(q) : "");
+        if(q) cl.style.background = "color-mix(in srgb, var(--teal) " + Math.round(12 + 30*q/mx) + "%, transparent)";
+        cl.title = v + " → " + q; d.appendChild(cl);
+      });
+      row.appendChild(d); c.appendChild(row);
+    });
+    r.appendChild(c);
+  });
+
+  var g = {}, gc = el("section","card");
+  gc.appendChild(el("p","eyebrow", L(S.rGT)));
+  rows.forEach(function(x){
+    var k = ((x.monitoria||"—")+"").trim() || "—";
+    if(!g[k]) g[k] = {n:0, s:0, c:0};
+    g[k].n++;
+    ALL.forEach(function(it){ var v = x.respostas[it.id]; if(typeof v === "number"){ g[k].s += v; g[k].c++; } });
+  });
+  var tb = document.createElement("table"), hr = document.createElement("tr");
+  [S.c1, S.c2, S.c3].forEach(function(h, i){ hr.appendChild(el("th", i ? "n" : "", L(h))); });
+  tb.appendChild(hr);
+  Object.keys(g).sort().forEach(function(k){
+    var tr = document.createElement("tr");
+    tr.appendChild(el("td","", k));
+    tr.appendChild(el("td","n", String(g[k].n)));
+    tr.appendChild(el("td","n", g[k].c ? (g[k].s/g[k].c).toFixed(1) : "—"));
+    tb.appendChild(tr);
+  });
+  gc.appendChild(tb); r.appendChild(gc);
+
+  [["impressoes", S.rImp], ["mudar", S.rMud]].forEach(function(p){
+    var list = rows.map(function(x){ return ((x[p[0]]||"")+"").trim(); }).filter(Boolean);
+    if(!list.length) return;
+    var c = el("section","card");
+    c.appendChild(el("p","eyebrow", L(p[1])));
+    c.appendChild(el("h2","", String(list.length)));
+    list.forEach(function(q){ c.appendChild(el("p","quote", "“" + q + "”")); });
+    r.appendChild(c);
+  });
+}
+function acts(head){
+  var a = el("div","acts");
+  if(rows && rows.length){
+    var b = el("button","btn g", L(S.csv)); b.type = "button"; b.onclick = csv; a.appendChild(b);
+  }
+  var lk = document.createElement("a");
+  lk.className = "btn g"; lk.href = location.pathname; lk.textContent = L(S.openF);
+  a.appendChild(lk);
+  var o = el("button","btn g", L(S.out)); o.type = "button";
+  o.onclick = function(){ try{ localStorage.removeItem("ibcr-k"); }catch(e){} chave = ""; rows = null; askKey(); };
+  a.appendChild(o); head.appendChild(a);
+}
+function csv(){
+  var q = function(x){ return '"' + String(x == null ? "" : x).replace(/"/g,'""') + '"'; };
+  var out = [["data","idioma","monitoria"].concat(ALL.map(function(i){ return L(i.lb); }))
+              .concat([L(S.rImp), L(S.rMud)]).map(q).join(",")];
+  rows.forEach(function(r){
+    var line = [q(r.ts), q(r.lang), q(r.monitoria)];
+    ALL.forEach(function(it){
+      var v = r.respostas[it.id];
+      line.push(typeof v === "number" ? String(v) : ((r.na && r.na.indexOf(it.id) >= 0) ? q("N/A") : '""'));
+    });
+    line.push(q(r.impressoes), q(r.mudar));
+    out.push(line.join(","));
+  });
+  var b = new Blob(["﻿" + out.join("\r\n")], {type:"text/csv;charset=utf-8"});
+  var u = URL.createObjectURL(b), a = document.createElement("a");
+  a.href = u; a.download = "ibcr-capacitacao.csv"; document.body.appendChild(a); a.click();
+  setTimeout(function(){ URL.revokeObjectURL(u); a.remove(); }, 1000);
+}
+
+/* ---------- início ---------- */
+var isRes = /resultados/.test(location.hash) || /[?&]p=resultados/.test(location.search);
+function start(){
+  mast(isRes);
+  if(isRes){ $("#rail").hidden = true; if(chave) load(); else askKey(); }
+  else { $("#rail").hidden = false; form(); }
+}
+document.querySelectorAll(".langs button").forEach(function(b){
+  b.onclick = function(){
+    lang = (b.dataset.l === "en") ? 1 : 0;
+    try{ localStorage.setItem("ibcr-l", lang ? "en" : "pt"); }catch(e){}
+    mast(isRes);
+    if(isRes){ if(rows) draw(); else if(chave) load(); else askKey(); }
+    else { ans = {}; nas = {}; warned = false; form(); }
+  };
+});
+start();
+})();
+</script>
+</body>
+</html>
